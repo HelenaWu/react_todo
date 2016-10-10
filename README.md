@@ -3,6 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Blocitoff is a simple todo app for learning to code in React.
+[Demo](https://stormy-ridge-15940.herokuapp.com/)
 
 User can choose to create a new task, set priority for the task, and mark a task as completed. Additionally, users can go back and forward between current tasks and completed tasks.
 
