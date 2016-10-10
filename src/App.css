@@ -1,0 +1,21 @@
+.App {
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.App-header {
+  background-color: #eee;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.Complete {
+  text-decoration: line-through;
+}
