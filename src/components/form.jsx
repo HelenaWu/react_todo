@@ -3,8 +3,11 @@ import React, {
 }
 from 'react';
 import '../App.css';
+import Config from '../config';
 import * as firebase from 'firebase';
 import {Button, FormGroup, FormControl, Table} from 'react-bootstrap';
+//Q1: how to mutate state?
+//Q2: key in form map function
 
 class TodoForm extends Component {
   constructor(props){
@@ -12,7 +15,7 @@ class TodoForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.syncDescription = this.syncDescription.bind(this);
     this.syncPriority = this.syncPriority.bind(this);
-
+    this.priorities = ['Select Priority', 'high', 'med', 'low'];
     this.state = {
       description: '',
       priority: '',
@@ -30,14 +33,17 @@ class TodoForm extends Component {
   }
   handleSubmit(e) {
     e.preventDefault();
-
-    const todosRef = firebase.database().ref('todos/');
+    const todosRef = firebase.database().ref(Config.firebase.root_ref);
     let newTodoRef = todosRef.push();
     newTodoRef.set({
       status: 'active',
       description: this.state.description,
       priority: this.state.priority,
       created: Date.now(),
+    });
+    this.setState({
+      description: '',
+      priority: ''
     });
   }
   render() {
@@ -63,8 +69,11 @@ class TodoForm extends Component {
               <td>
                 <FormGroup>
                   <FormControl
-                    type="text" onChange={this.syncPriority} value={this.state.priority} placeholder="high, med, low"
-                  />
+                    componentClass="select" onChange={this.syncPriority} value={this.state.priority} placeholder="Select Priority">
+                    {this.priorities.map( (level) =>
+                      <option value={level}>{level}</option>
+                    )}
+                  </FormControl>
                 </FormGroup>
               </td>
               <td>
@@ -76,7 +85,6 @@ class TodoForm extends Component {
           </tbody>
         </Table>
        < /div>
-
     );
   }
 }
